@@ -91,7 +91,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 				"所谓无底深渊，下去，也是前程万里",
 				"累了就歇会儿，没人逼你登峰造极",
 				"好好活着哦",
-				"————小橘小橘&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp————哎，我在",
+				"————小橘小橘————哎，我在",
 				"心若没有栖息的地方，到哪里都是在流浪",
 				"年少莫问归途，岁月自有回响。步履不负韶华，人生自有远方",
 				"岁月极美，在于它必然的流逝",
