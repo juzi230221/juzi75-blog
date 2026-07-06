@@ -161,6 +161,7 @@ export default defineConfig({
 					: []),
 			],
 			defaultProps: {
+				tabSize: 4,
 				wrap: false,
 				overridesByLang: {
 					shellsession: {
