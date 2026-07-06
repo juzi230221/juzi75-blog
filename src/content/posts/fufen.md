@@ -1,6 +1,6 @@
 ---
 title: 赋分原理的探索与程序实现
-published: 2025-03-29
+published: 2026-07-06
 slug: fufen
 pinned: false
 description: 探究赋分的机制
@@ -37,13 +37,13 @@ draft: false
 我们记：
 
 - 一个学生的原始分为O，赋分为F
-- 所在等级区间的最高原始分为O_{上}，对应赋分上界F_{上}
-- 所在等级区间的最低原始分为O_{下}，对应赋分上界F_{下}
+- 所在等级区间的最高原始分为 $O_{上}$ ，对应赋分上界 $F_{上}$ 
+- 所在等级区间的最低原始分为 $O_{下}$ ，对应赋分上界 $F_{下}$ 
 
 赋分的本质是映射，大致步骤：
 
 1. 根据O划定等级(A~E)
-2. 根据所在等级的O_{上}、O_{下}、F_{上}、F_{下}，代入公式进行计算
+2. 根据所在等级的 $O_{上}$ 、 $O_{下}$ 、 $F_{上}$ 、 $F_{下}$ ，代入公式进行计算
 3. 计算结果四舍五入得到F
 
 注：
@@ -68,7 +68,7 @@ draft: false
 
 - 计算等级划分分数线：当这个排名有多人同分时，我们不妨从该排名学生向上下寻找最近的另一分数分界线作为 **等级划分分数线** 
 
-例如下图，15%等级分界线离原始分59-60划分线最近，所以我们向下取O_{下}=60，对应F_{下}=86
+例如下图，15%等级分界线离原始分59-60划分线最近，所以我们向下取 $O_{下}$ =60，对应 $F_{下}$ =86
 
 ![切线](./images/fufen/line.avif)
 
@@ -102,16 +102,16 @@ draft: false
 
 那么：
 - 已知F -> 所在等级
-- 已知O+F+F_{上}+F_{下} -> O_{上}+O_{下}
-- A等级的O_{上}已知，为最高分
+- 已知O+F+ $F_{上}$ + $F_{下}$  ->  $O_{上}$ + $O_{下}$ 
+- A等级的 $O_{上}$ 已知，为最高分
 - 可依次推得原始分分数线
 - 段排/总人数即为大概的比例
 
 我们可以：
 1. 获取样本（O和对应的F）
-2. 判断所在等级区间，得出F_{上}和F_{下}
-3. O_{上}已知的情况下，公式计算出O_{下}
-4. 用“O_{下}所处段排”比上“该科考试总人数”得到百分比
+2. 判断所在等级区间，得出 $F_{上}$ 和 $F_{下}$ 
+3.  $O_{上}$ 已知的情况下，公式计算出 $O_{下}$ 
+4. 用“ $O_{下}$ 所处段排”比上“该科考试总人数”得到百分比
 
 ### 举例
 
@@ -119,7 +119,7 @@ draft: false
 
 ![代入公式](./images/fufen/nex.avif)
 
-按计算器得：O_{下}=59.5≈60
+按计算器得： $O_{下}$ =59.5≈60
 
 查看：“59分对应的段排-1”（≥60分的人数）为383
 
@@ -140,7 +140,109 @@ draft: false
 ### 代码实现
 
 ```cpp
-
+#include<bits/stdc++.h>
+#include<conio.h>
+using namespace std;
+struct Stu{
+	int id;
+	string name;
+	//0 [1,9]
+	double origin[12],last[12];
+}a[1145],li[1145],wen[1145];
+int n,nli,nwen,nt,t,cut[8],p,fs[]={0,100,85,70,55,40},fx[]={0,86,71,56,41,30};
+double rate[8]={0,0.50,0.87,0.92,0.97,1.00},fup,fdown,oup,odown,ori;
+// rate  50% 37% 10% 3%  0%
+//score  86  71  56  41  30
+int main(){
+    //get data
+	freopen("firstget.txt","r",stdin);
+	while(1){
+		++n;
+		cin>>a[n].id;
+//		if(a[n].id!=a[n-1].id) cout<<a[n].id<<" *\n";//
+		if(a[n].id==0) break;
+		cin>>a[n].name;
+		for(int i=0;i<=9;++i) cin>>a[n].origin[i],a[n].last[i]=a[n].origin[i];
+	}
+	--n;
+	cout<<"n="<<n<<"\n";
+    //for each subject
+	for(t=5;t<=9;++t){
+		if(t==7) continue;
+        //sort by score
+		sort(a+1,a+n+1,[](Stu a,Stu b){return a.origin[t]>b.origin[t];});
+		//count valid students
+        nt=1;
+		for(int i=1;i<=n;++i,++nt) if(a[i].origin[t]<=0) break;
+		--nt;
+        //find O_down
+		for(int i=1;i<=5;++i){
+			cut[i]=round((double)nt*rate[i]);
+//			if(t==5) cout<<cut[i]<<" "<<a[cut[i]].origin[t]<<" *\n";//
+			p=1;
+			while(a[cut[i]].origin[t]==a[cut[i]+p].origin[t]&&
+				a[cut[i]].origin[t]==a[cut[i]-p].origin[t]) ++p;//same score forward/backward
+			//question:at the middle
+//			if(t==5) cout<<cut[i]+p<<" "<<a[cut[i]+p].origin[3]<<" "<<cut[i]-p<<" "<<a[cut[i]-p].origin[3]<<"\n";//
+			if(a[cut[i]].origin[t]!=a[cut[i]+p].origin[t]) cut[i]+=p-1;
+			else cut[i]-=p-1;
+		}
+        //formula
+		for(int i=1;i<=5;++i){
+			fup=fs[i],fdown=fx[i],oup=a[cut[i-1]+1].origin[t],odown=a[cut[i]].origin[t];
+			for(int j=cut[i-1]+1;j<=cut[i];++j){
+				ori=a[j].origin[t];
+				a[j].last[t]=round((fup*(ori-odown)+fdown*(oup-ori))/(oup-odown));
+			}
+		}
+	}
+    //calulate final total score
+	for(int i=1;i<=n;++i){
+		a[i].last[0]=0;
+		for(int j=1;j<=9;++j){
+			if(j!=5&&j!=6&&j!=8&&j!=9) a[i].last[j]=a[i].origin[j];
+			if(a[i].last[j]>=0) a[i].last[0]+=a[i].last[j];//plus no -1
+		}
+	}
+	//wen/li divide
+	sort(a+1,a+n+1,[](Stu a,Stu b){return a.origin[4]>b.origin[4];});
+	for(int i=1;i<=n;++i){
+		if(a[i].origin[4]<=0) break;
+		nli=i;
+		li[i]=a[i]; 
+	}
+	sort(a+1,a+n+1,[](Stu a,Stu b){return a.origin[7]>b.origin[7];});
+	for(int i=1;i<=n;++i){
+		if(a[i].origin[7]<=0) break;
+		nwen=i;
+		wen[i]=a[i]; 
+	}
+    //print result
+	freopen("result_li.txt","w",stdout);
+	sort(li+1,li+nli+1,[](Stu a,Stu b){return a.last[0]>b.last[0];});
+	cout<<"班级\t姓名\t总分\t语文\t数学\t英语\t物理\t化学原始分\t化学赋分\t生物原始分\t生物赋分\t地理原始分\t地理赋分\t政治原始分\t政治赋分\t\n";
+	for(int i=1;i<=nli;++i){
+		cout<<li[i].id<<"\t"<<li[i].name<<"\t";
+		for(int j=0;j<=3;++j) cout<<li[i].last[j]<<"\t";
+		cout<<li[i].last[4]<<"\t";
+		for(int j=5;j<=9;++j) if(j!=7) cout<<li[i].origin[j]<<"\t"<<li[i].last[j]<<"\t";
+		cout<<"\n";
+	}
+	freopen("result_wen.txt","w",stdout);
+	sort(wen+1,wen+nwen+1,[](Stu a,Stu b){return a.last[0]>b.last[0];});
+	cout<<"班级\t姓名\t总分\t语文\t数学\t英语\t历史\t化学原始分\t化学赋分\t生物原始分\t生物赋分\t地理原始分\t地理赋分\t政治原始分\t政治赋分\t\n";
+	for(int i=1;i<=nwen;++i){
+		cout<<wen[i].id<<"\t"<<wen[i].name<<"\t";
+		for(int j=0;j<=3;++j) cout<<wen[i].last[j]<<"\t";
+		cout<<wen[i].last[7]<<"\t";
+		for(int j=5;j<=9;++j) if(j!=7) cout<<wen[i].origin[j]<<"\t"<<wen[i].last[j]<<"\t";
+		cout<<"\n";
+	}
+	freopen("CON","w",stdout);
+	cout<<"finished\nenter to exit";
+	getch();
+	return 0;
+}
 ```
 
 ### 效果展示
