@@ -134,6 +134,7 @@ export default defineConfig({
 			themes: [expressiveCodeConfig.darkTheme, expressiveCodeConfig.lightTheme],
 			useDarkModeMediaQuery: false,
 			themeCssSelector: (theme) => `[data-theme='${theme.name}']`,
+			tabWidth: expressiveCodeConfig.tabWidth ?? 4,
 			plugins: [
 				// pluginLanguageBadge 配置 - 从expressiveCodeConfig读取设置
 				...(expressiveCodeConfig.pluginLanguageBadge?.enable === true
@@ -161,7 +162,6 @@ export default defineConfig({
 					: []),
 			],
 			defaultProps: {
-				tabSize: 4,
 				wrap: false,
 				overridesByLang: {
 					shellsession: {

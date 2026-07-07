@@ -5,6 +5,8 @@ export type ExpressiveCodeConfig = {
 	darkTheme: string;
 	/** 亮色主题名称（用于亮色模式） */
 	lightTheme: string;
+	/** 代码块缩进宽度 */
+	tabWidth?: number;
 	/** 代码块折叠插件配置 */
 	pluginCollapsible?: PluginCollapsibleConfig;
 	/** 语言徽章插件配置 */
