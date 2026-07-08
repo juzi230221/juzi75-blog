@@ -4,7 +4,7 @@ published: 2026-07-06
 slug: fufen
 pinned: false
 description: 探究赋分的机制
-tags: [赋分, 模拟, C++]
+tags: [模拟, C++]
 category: 技术
 draft: false
 # image: ./images/Logis/1-0.avif
