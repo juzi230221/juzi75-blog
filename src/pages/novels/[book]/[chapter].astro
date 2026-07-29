@@ -1,0 +1,60 @@
+---
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { getNovels } from "@/utils/novel-utils";
+
+export async function getStaticPaths() {
+  const novels = await getNovels();
+  return novels.flatMap((novel) =>
+    novel.chapters.map((chapter) => ({
+      params: { book: novel.slug, chapter: chapter.slug },
+      props: { novel, chapter },
+    }))
+  );
+}
+
+const { novel, chapter: currentChapter } = Astro.props;
+const chapters = novel.chapters;
+const currentIndex = chapters.findIndex((item) => item.slug === currentChapter.slug);
+const prevChapter = currentIndex > 0 ? chapters[currentIndex - 1] : null;
+const nextChapter = currentIndex >= 0 && currentIndex < chapters.length - 1 ? chapters[currentIndex + 1] : null;
+---
+
+<MainGridLayout title={currentChapter.title} description={currentChapter.description}>
+  <div class="card-base p-6">
+    <div class="mb-6">
+      <div class="text-sm text-(--primary)">{novel.title}</div>
+      <h1 class="mt-2 text-3xl font-bold">{currentChapter.title}</h1>
+    </div>
+
+    <article class="leading-8 text-base whitespace-pre-wrap text-black/80 dark:text-white/80">
+      {currentChapter.body}
+    </article>
+
+    <div class="mt-8 flex flex-col gap-3 border-t border-black/10 pt-6 dark:border-white/10 md:flex-row md:items-center md:justify-between">
+      {prevChapter ? (
+        <a
+          href={`/novels/${novel.slug}/${prevChapter.slug}/`}
+          class="rounded-lg border border-black/10 px-4 py-2 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
+        >
+          上一章
+        </a>
+      ) : <div />}
+
+      <a
+        href={`/novels/${novel.slug}/`}
+        class="rounded-lg border border-black/10 px-4 py-2 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
+      >
+        目录
+      </a>
+
+      {nextChapter ? (
+        <a
+          href={`/novels/${novel.slug}/${nextChapter.slug}/`}
+          class="rounded-lg border border-black/10 px-4 py-2 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
+        >
+          下一章
+        </a>
+      ) : <div />}
+    </div>
+  </div>
+</MainGridLayout>

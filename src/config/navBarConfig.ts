@@ -33,6 +33,9 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		],
 	});
 
+	// 小说
+	links.push(LinkPresets.Novels);
+
 	// 友链
 	links.push(LinkPresets.Friends);
 
@@ -144,6 +147,12 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		name: "标签",
 		url: "/tags/",
 		icon: "material-symbols:tag-rounded",
+	},
+	Novels: {
+		name: "小说",
+		url: "/novels/",
+		icon: "material-symbols:menu-book-outline",
+		pageKey: "novels",
 	},
 	Friends: {
 		name: "友链",

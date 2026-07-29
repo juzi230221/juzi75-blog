@@ -1,0 +1,55 @@
+---
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { getNovels } from "@/utils/novel-utils";
+
+const novels = await getNovels();
+---
+
+<MainGridLayout title="小说" description="阅读小说章节">
+  <div class="flex flex-col gap-6">
+    <div class="card-base p-6">
+      <h1 class="text-3xl font-bold mb-2">小说阅读</h1>
+      <p class="text-sm text-black/70 dark:text-white/70">
+        这里是小说入口，当前展示了一个示例小说。你可以继续新增更多章节文件。
+      </p>
+    </div>
+
+    {novels.map((novel) => (
+      <div class="card-base p-6 flex flex-col gap-4">
+        <div>
+          <h2 class="text-2xl font-semibold">{novel.title}</h2>
+          <p class="mt-2 text-sm text-black/70 dark:text-white/70">{novel.description}</p>
+        </div>
+
+        <div class="flex flex-col gap-3 md:flex-row md:items-end md:gap-4">
+          <div class="flex-1">
+            <label class="block text-sm font-medium mb-2" for={`jump-${novel.slug}`}>输入章节号</label>
+            <input
+              id={`jump-${novel.slug}`}
+              class="w-full rounded-lg border border-black/10 bg-white/70 px-3 py-2 text-sm outline-none dark:border-white/10 dark:bg-black/20"
+              placeholder="例如 2"
+            />
+          </div>
+          <button
+            class="rounded-lg bg-(--primary) px-4 py-2 text-sm font-medium text-white"
+            type="button"
+            onclick={`const input = document.getElementById('jump-${novel.slug}'); const value = input?.value.trim(); const path = value ? '/novels/${novel.slug}/' + encodeURIComponent(value) + '/' : '/novels/${novel.slug}/'; window.location.assign(path);`}
+          >
+            跳转
+          </button>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          {novel.chapters.map((chapter) => (
+            <a
+              href={`/novels/${novel.slug}/${chapter.slug}/`}
+              class="rounded-full border border-black/10 px-3 py-1 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
+            >
+              {chapter.title}
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</MainGridLayout>

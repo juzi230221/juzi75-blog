@@ -1,0 +1,35 @@
+---
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { getNovelBySlug, getNovels } from "@/utils/novel-utils";
+
+export async function getStaticPaths() {
+  const novels = await getNovels();
+  return novels.map((novel) => ({
+    params: { book: novel.slug },
+    props: { novel },
+  }));
+}
+
+const { novel } = Astro.props;
+---
+
+<MainGridLayout title={novel.title} description={novel.description}>
+  <div class="flex flex-col gap-6">
+    <div class="card-base p-6">
+      <h1 class="text-3xl font-bold">{novel.title}</h1>
+      <p class="mt-3 text-sm text-black/70 dark:text-white/70">{novel.description}</p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {novel.chapters.map((chapter) => (
+        <a
+          href={`/novels/${novel.slug}/${chapter.slug}/`}
+          class="card-base p-5 transition hover:-translate-y-1"
+        >
+          <div class="text-sm text-(--primary)">{chapter.title}</div>
+          <p class="mt-2 text-sm text-black/70 dark:text-white/70">{chapter.description}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</MainGridLayout>
