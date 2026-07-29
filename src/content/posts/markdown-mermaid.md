@@ -5,7 +5,7 @@ pinned: false
 description: 一个包含 Mermaid 的 Markdown 博客文章简单示例。
 tags: [教程]
 category: 教程
-draft: false
+draft: true
 ---
 ## Markdown 中 Mermaid 图表完整指南
 

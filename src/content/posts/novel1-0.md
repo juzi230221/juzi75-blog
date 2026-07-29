@@ -8,6 +8,7 @@ tags: [小说]
 category: 小说
 password: "littlesay"
 passwordHint: ""
+draft: true
 ---
 
 标签：校园脑洞、言情

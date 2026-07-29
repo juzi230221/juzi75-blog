@@ -5,7 +5,7 @@ description: 深入了解 Firefly 的布局系统，包括侧边栏布局（左�
 image: ./images/firefly1.avif
 tags: [教程]
 category: 教程
-draft: false
+draft: true
 ---
 
 ## 📖 概述

@@ -8,6 +8,7 @@ tags: [小说]
 category: 小说
 password: "littlesay"
 passwordHint: ""
+draft: true
 ---
 
 庄生晓梦迷蝴蝶。仿佛梦魂归帝所。浮生若梦，为欢几何。——引子

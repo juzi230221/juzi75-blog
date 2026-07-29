@@ -8,6 +8,7 @@ tags: [小说]
 category: 小说
 password: "littlesay"
 passwordHint: ""
+draft: true
 ---
 
 至于为什么他这么急，那基本是夏小橘早饭吃的太慢导致的，怕迟到。

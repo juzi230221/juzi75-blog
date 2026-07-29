@@ -6,6 +6,7 @@ tags: [小说]
 category: 小说
 password: "littlesay"
 passwordHint: ""
+draft: true
 ---
 
 夏小橘开始头脑风暴，对未知的事物展开思考。
