@@ -22,12 +22,12 @@ const wordCount = currentChapter.body.replace(/\s/g, "").length;
 
 <MainGridLayout title={currentChapter.title} description={currentChapter.description}>
   <div class="card-base p-6">
-    <div class="mb-2">
+    <div class="mb-4">
       <div class="text-sm text-(--primary)">{novel.title}</div>
       <h1 class="mt-1 text-3xl font-bold">{currentChapter.title}</h1>
     </div>
 
-    <article class="leading-8 text-[1.05rem] whitespace-pre-wrap text-black/80 dark:text-white/80">
+    <article class="leading-9 text-[1.15rem] whitespace-pre-wrap text-black/80 dark:text-white/80">
       {currentChapter.body}
     </article>
 

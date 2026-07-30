@@ -40,7 +40,8 @@ export async function getNovels(): Promise<NovelBook[]> {
 		const chapterOrder = Number(data.order ?? 0);
 		const chapterDescription = String(data.description ?? "");
 		const wordCount = Number(data.wordCount ?? 0);
-		const chapterBody = typeof mod.rawContent === "function" ? mod.rawContent() : "";
+		const rawBody = typeof mod.rawContent === "function" ? mod.rawContent() : "";
+		const chapterBody = rawBody.replace(/^[\s\uFEFF\xA0]+/, "").replace(/[\s\uFEFF\xA0]+$/, "");
 
 		const chapter: NovelChapter = {
 			id: chapterSlug,
