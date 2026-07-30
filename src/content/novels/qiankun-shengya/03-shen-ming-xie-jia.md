@@ -5,6 +5,7 @@ bookTitle: 乾坤盛世
 bookDescription: 这是一本关于命运、成长与守护的仙侠故事。
 slug: 3
 order: 3
+wordCount: 650
 description: 林砚在祠堂里听见了关于家族与誓言的秘密。
 ---
 老人没有再多说什么，只是让林砚坐在木桌前，点燃了一支香。

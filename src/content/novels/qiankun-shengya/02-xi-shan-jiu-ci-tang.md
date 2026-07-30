@@ -5,6 +5,7 @@ bookTitle: 乾坤盛世
 bookDescription: 这是一本关于命运、成长与守护的仙侠故事。
 slug: 2
 order: 2
+wordCount: 700
 description: 林砚第一次踏入旧祠堂，遇见了一个神秘的老人。
 ---
 西山的树影很长，像是把整个黄昏都拖进了山谷里。

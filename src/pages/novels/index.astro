@@ -17,7 +17,9 @@ const novels = await getNovels();
     {novels.map((novel) => (
       <div class="card-base p-6 flex flex-col gap-4">
         <div>
-          <h2 class="text-2xl font-semibold">{novel.title}</h2>
+          <a href={`/novels/${novel.slug}/`} class="text-2xl font-semibold text-(--primary) transition hover:opacity-80">
+            {novel.title}
+          </a>
           <p class="mt-2 text-sm text-black/70 dark:text-white/70">{novel.description}</p>
         </div>
 
@@ -37,17 +39,6 @@ const novels = await getNovels();
           >
             跳转
           </button>
-        </div>
-
-        <div class="flex flex-wrap gap-2">
-          {novel.chapters.map((chapter) => (
-            <a
-              href={`/novels/${novel.slug}/${chapter.slug}/`}
-              class="rounded-full border border-black/10 px-3 py-1 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
-            >
-              {chapter.title}
-            </a>
-          ))}
         </div>
       </div>
     ))}

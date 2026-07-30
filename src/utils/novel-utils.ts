@@ -7,6 +7,7 @@ export interface NovelChapter {
 	bookDescription: string;
 	order: number;
 	description: string;
+	wordCount?: number;
 	body: string;
 }
 
@@ -38,6 +39,7 @@ export async function getNovels(): Promise<NovelBook[]> {
 		const chapterTitle = String(data.title ?? "未命名章节");
 		const chapterOrder = Number(data.order ?? 0);
 		const chapterDescription = String(data.description ?? "");
+		const wordCount = Number(data.wordCount ?? 0);
 		const chapterBody = typeof mod.rawContent === "function" ? mod.rawContent() : "";
 
 		const chapter: NovelChapter = {
@@ -49,6 +51,7 @@ export async function getNovels(): Promise<NovelBook[]> {
 			bookDescription,
 			order: chapterOrder,
 			description: chapterDescription,
+			wordCount: Number.isFinite(wordCount) ? wordCount : undefined,
 			body: chapterBody,
 		};
 

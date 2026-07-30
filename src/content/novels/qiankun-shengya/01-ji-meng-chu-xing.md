@@ -5,6 +5,7 @@ bookTitle: 乾坤盛世
 bookDescription: 这是一本关于命运、成长与守护的仙侠故事。
 slug: 1
 order: 1
+wordCount: 600
 description: 旧梦初醒，少年踏上修行之路。
 ---
 城北的风从破旧的檐角穿过，吹得长街上的灯笼轻轻晃动。

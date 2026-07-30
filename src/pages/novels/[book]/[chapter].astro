@@ -17,20 +17,25 @@ const chapters = novel.chapters;
 const currentIndex = chapters.findIndex((item) => item.slug === currentChapter.slug);
 const prevChapter = currentIndex > 0 ? chapters[currentIndex - 1] : null;
 const nextChapter = currentIndex >= 0 && currentIndex < chapters.length - 1 ? chapters[currentIndex + 1] : null;
+const wordCount = currentChapter.body.replace(/\s/g, "").length;
 ---
 
 <MainGridLayout title={currentChapter.title} description={currentChapter.description}>
   <div class="card-base p-6">
-    <div class="mb-6">
+    <div class="mb-2">
       <div class="text-sm text-(--primary)">{novel.title}</div>
-      <h1 class="mt-2 text-3xl font-bold">{currentChapter.title}</h1>
+      <h1 class="mt-1 text-3xl font-bold">{currentChapter.title}</h1>
     </div>
 
-    <article class="leading-8 text-base whitespace-pre-wrap text-black/80 dark:text-white/80">
+    <article class="leading-8 text-[1.05rem] whitespace-pre-wrap text-black/80 dark:text-white/80">
       {currentChapter.body}
     </article>
 
-    <div class="mt-8 flex flex-col gap-3 border-t border-black/10 pt-6 dark:border-white/10 md:flex-row md:items-center md:justify-between">
+    <div class="mt-6 text-sm text-black/60 dark:text-white/60">
+      字数：{wordCount}字
+    </div>
+
+    <div class="mt-6 flex flex-col gap-3 border-t border-black/10 pt-6 dark:border-white/10 md:flex-row md:items-center md:justify-between">
       {prevChapter ? (
         <a
           href={`/novels/${novel.slug}/${prevChapter.slug}/`}
