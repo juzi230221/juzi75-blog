@@ -8,7 +8,7 @@ const novels = await getNovels();
 <MainGridLayout title="小说" description="阅读小说章节">
   <div class="flex flex-col gap-6">
     <div class="card-base p-6">
-      <h1 class="text-3xl font-bold mb-2">小说</h1>
+      <h1 class="text-3xl font-bold mb-2 text-black/90 dark:text-white/90">小说</h1>
       <p class="text-sm text-black/70 dark:text-white/70">
         这里是一些原创小说。
       </p>
@@ -17,7 +17,7 @@ const novels = await getNovels();
     {novels.map((novel) => (
       <div class="card-base p-6 flex flex-col gap-4">
         <div>
-          <a href={`/novels/${novel.slug}/`} class="text-2xl font-semibold text-(--primary) transition hover:opacity-80">
+          <a href={`/novels/${novel.slug}/`} class="text-2xl font-semibold text-(--primary) transition hover:opacity-80 dark:text-white">
             {novel.title}
           </a>
           <p class="mt-2 whitespace-pre-wrap text-sm leading-6 text-black/70 dark:text-white/70">{novel.description}</p>

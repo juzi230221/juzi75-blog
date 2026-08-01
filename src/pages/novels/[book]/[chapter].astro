@@ -23,8 +23,8 @@ const wordCount = currentChapter.body.replace(/\s/g, "").length;
 <MainGridLayout title={currentChapter.title} description={currentChapter.description}>
   <div class="card-base p-6">
     <div class="mb-4">
-      <div class="text-sm text-(--primary)">{novel.title}</div>
-      <h1 class="mt-1 text-3xl font-bold">{currentChapter.title}</h1>
+      <div class="text-sm text-(--primary) dark:text-white">{novel.title}</div>
+      <h1 class="mt-1 text-3xl font-bold text-black/90 dark:text-white/90">{currentChapter.title}</h1>
     </div>
 
     <article class="leading-9 text-[1.15rem] whitespace-pre-wrap text-black/80 dark:text-white/80">
@@ -39,7 +39,7 @@ const wordCount = currentChapter.body.replace(/\s/g, "").length;
       {prevChapter ? (
         <a
           href={`/novels/${novel.slug}/${prevChapter.slug}/`}
-          class="rounded-lg border border-black/10 px-4 py-2 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
+          class="rounded-lg border border-black/10 px-4 py-2 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10 text-black/80 dark:text-white/80"
         >
           上一章
         </a>
@@ -47,7 +47,7 @@ const wordCount = currentChapter.body.replace(/\s/g, "").length;
 
       <a
         href={`/novels/${novel.slug}/`}
-        class="rounded-lg border border-black/10 px-4 py-2 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
+        class="rounded-lg border border-black/10 px-4 py-2 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10 text-black/80 dark:text-white/80"
       >
         目录
       </a>
@@ -55,7 +55,7 @@ const wordCount = currentChapter.body.replace(/\s/g, "").length;
       {nextChapter ? (
         <a
           href={`/novels/${novel.slug}/${nextChapter.slug}/`}
-          class="rounded-lg border border-black/10 px-4 py-2 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
+          class="rounded-lg border border-black/10 px-4 py-2 text-sm transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10 text-black/80 dark:text-white/80"
         >
           下一章
         </a>

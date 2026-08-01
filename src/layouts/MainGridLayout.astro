@@ -113,7 +113,8 @@ const shouldRenderGradient =
 // 检查是否为首页
 const isHomePageCheck = isHomePage(Astro.url.pathname);
 
-const shouldRenderCategoryBar = !!siteConfig.categoryBar;
+// 全站是否显示分类栏；但在小说（/novels）路径下不显示分类栏
+const shouldRenderCategoryBar = !!siteConfig.categoryBar && !Astro.url.pathname.startsWith('/novels');
 
 // 检查是否在文章详情页
 const isPostPage = !!postSlug;
