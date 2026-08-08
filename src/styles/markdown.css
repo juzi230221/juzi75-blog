@@ -117,7 +117,21 @@
   .katex-display-container {
     max-width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
     margin: 1em 0;
+    padding: 0.25rem 0;
+    /* 保证块级公式在页面上居中显示 */
+    text-align: center;
+    display: block;
+  }
+
+  /* KaTeX display 模式样式通过后加载的覆盖 CSS 处理 */
+
+  .custom-md.prose table th,
+  .custom-md.prose table td,
+  .custom-md table[data-horizontal-scroll-ready] th,
+  .custom-md table[data-horizontal-scroll-ready] td {
+    text-align: center;
   }
 
   .horizontal-scroll-container {
@@ -173,10 +187,11 @@
 
   th,
   td {
-    @apply px-3 py-2 text-left;
+    @apply px-3 py-2;
     min-width: 120px;
     border: none;
     word-break: break-word;
+    text-align: center;
 
     &:not(:last-child) {
       border-right: 1px solid var(--line-color);

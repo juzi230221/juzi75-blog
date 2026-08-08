@@ -1,0 +1,17 @@
+.custom-md .katex,
+.custom-md .katex-display {
+  font-size: 1.4em !important;
+  line-height: 1.3 !important;
+}
+
+.custom-md .katex-display {
+  display: inline-block !important;
+  max-width: 100% !important;
+  width: max-content !important;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.custom-md .katex-display > .katex-html {
+  overflow: visible !important;
+}

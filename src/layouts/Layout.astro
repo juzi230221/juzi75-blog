@@ -816,9 +816,25 @@ function disableAnimation() {
 
   function initCustomScrollbar() {
     // 只处理katex元素的滚动条，使用浏览器原生滚动条
-    const katexElements = document.querySelectorAll(
-      ".katex-display:not([data-scrollbar-initialized])"
+    // 支持 KaTeX 不同版本/输出类名：匹配 .katex 和 .katex-display
+    const katexNodeList = document.querySelectorAll(
+      ".katex:not([data-scrollbar-initialized]), .katex-display:not([data-scrollbar-initialized])"
     ) as NodeListOf<HTMLElement>;
+    const katexElements = Array.from(katexNodeList).filter((element) => {
+      if (element.classList.contains("katex-display")) {
+        return true;
+      }
+      const parent = element.parentElement;
+      if (!parent || parent.tagName !== "P") {
+        return false;
+      }
+      const nonWhitespaceChildren = Array.from(parent.childNodes).filter(
+        (node) =>
+          !(node.nodeType === Node.TEXT_NODE && !/\S/.test(node.textContent || ""))
+      );
+      return nonWhitespaceChildren.length === 1 && nonWhitespaceChildren[0] === element;
+    });
+
     katexElements.forEach((element) => {
       if (!element.parentNode) return;
 
