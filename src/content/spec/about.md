@@ -37,9 +37,9 @@ QQ：2274399041（加好友请注明来由）
 
 **⭐Fuwari开源地址：[https://github.com/saicaca/fuwari](https://github.com/saicaca/fuwari)**
 
-::github{repo="CuteLeaf/Firefly"}
+<!--::github{repo="CuteLeaf/Firefly"}
 
-::github{repo="saicaca/fuwari"}
+::github{repo="saicaca/fuwari"}-->
 
 ---
 
