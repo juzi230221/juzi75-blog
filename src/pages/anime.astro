@@ -270,7 +270,6 @@ const isConfigured = !!(BILIBILI_UID || (TMDB_API_KEY && TMDB_LIST_ID));
         </div>
 
         {!isConfigured ? (
-          <!-- 未配置提示 -->
           <div class="text-center py-16">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-(--btn-regular-bg) rounded-full mb-6 border border-(--line-divider)">
               <Icon name="material-symbols:settings" class="text-[2rem] text-(--btn-content)" />
