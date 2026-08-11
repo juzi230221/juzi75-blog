@@ -3,7 +3,7 @@ title: Logistic-基于混沌映射的图片加密解密
 published: 2026-07-02
 slug: Logistic
 pinned: false
-description: 基于混沌映射的一种图片加密方式
+description: 将混沌映射应用于图片加密
 tags: [加密, Python]
 category: 技术
 draft: false
