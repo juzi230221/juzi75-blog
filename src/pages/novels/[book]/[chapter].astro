@@ -1,5 +1,6 @@
 ---
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import Comment from "@components/comment/index.astro";
 import { getNovels } from "@/utils/novel-utils";
 
 export async function getStaticPaths() {
@@ -61,5 +62,8 @@ const wordCount = currentChapter.body.replace(/\s/g, "").length;
         </a>
       ) : <div />}
     </div>
+
+      <!-- 评论区（与文章页一致，使用 customPath 保证路径唯一） -->
+      <Comment customPath={`/novels/${novel.slug}/${currentChapter.slug}/`} title={currentChapter.title} />
   </div>
 </MainGridLayout>
