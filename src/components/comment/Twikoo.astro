@@ -9,7 +9,7 @@ interface Props {
 const twikooConfig = commentConfig.twikoo ?? { envId: "" };
 const jsUrl =
 	twikooConfig.jsUrl ||
-	"https://registry.npmmirror.com/twikoo/1.7.13/files/dist/twikoo.min.js";
+	"https://registry.npmmirror.com/twikoo/1.7.12/files/dist/twikoo.min.js";
 const cssUrl = twikooConfig.cssUrl;
 const config = {
 	...twikooConfig,
@@ -32,10 +32,18 @@ const config = {
 
   // 动态创建配置对象
   function createTwikooConfig() {
+    // 如果传入了自定义 path（例如通过 Comment 的 customPath），优先使用它，
+    // 否则回退到当前 URL 路径。
+    const resolvedPath = config.path || getCurrentPath();
+    const resolvedEnv = config.env || config.envId || config.envUrl || config.envID;
+
     return {
       ...config,
-      path: getCurrentPath(),
+      path: resolvedPath,
       el: "#tcomment",
+      // 保证同时传 env/envId，以兼容不同 Twikoo 版本/部署方式
+      env: resolvedEnv,
+      envId: resolvedEnv,
     };
   }
 
@@ -46,17 +54,26 @@ const config = {
       if (commentEl) {
         commentEl.innerHTML = "";
 
-        const dynamicConfig = createTwikooConfig();
-        console.log("[Twikoo] 初始化配置:", dynamicConfig);
+          const dynamicConfig = createTwikooConfig();
+          console.log("[Twikoo] 初始化配置:", dynamicConfig);
 
-        twikoo
-          .init(dynamicConfig)
-          .then(() => {
-            console.log("[Twikoo] 初始化完成");
-          })
-          .catch((error) => {
-            console.error("[Twikoo] 初始化失败:", error);
-          });
+          twikoo
+            .init(dynamicConfig)
+            .then((res) => {
+              console.log("[Twikoo] 初始化完成", res);
+            })
+            .catch((error) => {
+              // 输出更多调试信息，便于追踪后端返回的错误
+              console.error("[Twikoo] 初始化失败:", error);
+              try {
+                // 如果 error 为 fetch Response-like 对象，尝试读取文本
+                if (error && typeof error.text === "function") {
+                  error.text().then((t) => console.error("[Twikoo] 错误响应正文:", t));
+                }
+              } catch (e) {
+                // ignore
+              }
+            });
       }
     } else {
       // 如果 Twikoo 未加载，稍后重试
