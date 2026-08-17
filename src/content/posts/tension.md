@@ -1,6 +1,6 @@
 ---
 title: 紧张该怎么办
-published: 2026-08-16
+published: 2026-08-17
 slug: tension
 pinned: false
 description: 高考紧张之祭奠
