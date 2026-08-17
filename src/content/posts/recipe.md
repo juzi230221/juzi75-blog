@@ -11,7 +11,7 @@ draft: false
 ---
 # 丝瓜汤
 
-![丝瓜汤](./images/recipe/sgt.avif)
+<!-- ![丝瓜汤](./images/recipe/sgt.avif) -->
 
 ## 食材
 
@@ -33,7 +33,7 @@ draft: false
 
 # 西红柿炒蛋
 
-![西红柿炒蛋](./images/recipe/xhscd.avif)
+<!-- ![西红柿炒蛋](./images/recipe/xhscd.avif) -->
 
 ## 食材
 
