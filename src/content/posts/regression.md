@@ -5,7 +5,7 @@ slug: regression
 pinned: false
 description: 初次接触人工智能模型
 tags: [人工智能, Python, C++]
-category: 技术
+category: 研究
 draft: false
 image: ./images/regression/p6.avif
 

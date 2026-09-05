@@ -5,7 +5,7 @@ slug: fufen
 pinned: false
 description: 探究赋分的机制
 tags: [模拟, C++]
-category: 技术
+category: 研究
 draft: false
 # image: ./images/Logis/1-0.avif
 

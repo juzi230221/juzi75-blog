@@ -5,7 +5,7 @@ slug: Logistic
 pinned: false
 description: 将混沌映射应用于图片加密
 tags: [加密, Python]
-category: 技术
+category: 研究
 draft: false
 image: ./images/Logis/1-0.avif
 

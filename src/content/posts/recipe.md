@@ -5,7 +5,7 @@ slug: recipe
 pinned: false
 description: 食谱不能失传
 tags: [食谱]
-category: 食谱
+category: 生活
 draft: false
 
 ---
