@@ -4,7 +4,7 @@ published: 2026-09-05
 slug: xcb
 pinned: false
 description: 2026开甲学创部
-tags: []
+tags: [学生工作]
 category: 生活
 draft: false
 
