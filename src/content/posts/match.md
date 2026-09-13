@@ -228,6 +228,8 @@ int main(){
 	cout<<T;
 	return 0;
 }
+```
+```cpp
 //duipai.cpp
 #include<bits/stdc++.h>
 using namespace std;
@@ -261,6 +263,8 @@ int main(){
     cout<<1000-pi[999];
 	return 0;
 }
+```
+```cpp
 //random.cpp
 #include<bits/stdc++.h>
 #include<random>
@@ -278,6 +282,8 @@ int main(){
 	for(int i=1;i<=n;++i) cout<<A[i]<<" ";
 	return 0;
 }
+```
+```cpp
 //check.cpp
 #include<bits/stdc++.h>
 #include<windows.h>
